@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pulling API Data</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Trispace&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <div id="welcome-page" v-show="curPage == 0">
+        <h1>Welcome to the Store</h1>
+        <button v-on:click="clickEnter()">Click to Shop</button>
+      </div>
+      <div v-show="curPage == 1" class="shopping-page">
+        <div id="storefront-header">
+          <h2>Storefront</h2>
+          <button v-on:click="enterShoppingCart()">View Cart</button>
+        </div>
+        <div class="items-area">
+          <item
+            v-for="(product, index) in products"
+            v-bind:item="product"
+            v-bind:key="index"
+            v-bind:cart="shoppingCart"
+            class="item-block"
+            v-bind:cost="runningTotal"
+          >
+          </item>
+        </div>
+      </div>
+      <div v-show="curPage==2" class="shopping-page">
+        <div class="cart-area">
+          <cartitem
+            v-for="(product, index) in shoppingCart"
+            v-bind:item="product"
+            v-bind:key="index"
+            class="cart-item-block"
+          >
+          </cartitem>
+          Total: {{runningTotal}}
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
