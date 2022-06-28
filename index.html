@@ -15,13 +15,38 @@
       <div class="shopping-page">
         <div id="storefront-header">
           <h2>Storefront</h2>
-          <button v-on:click="enterShoppingCart()" v-show="curPage == 1">
-            View Cart
+          <div>
+            <div v-show="userValidation()">
+              <br />
+              Welcome, {{userName}}
+            </div>
+            <button
+              v-on:click="enterShoppingCart()"
+              v-if="(curPage == 1) && !isInvalidLogin()"
+            >
+              View Cart
+            </button>
+            <!-- <button v-on:click="curPage = 0" v-else-if="curPage == 1">
+              Save Cart and Login
+            </button> -->
+          </div>
+          <button
+            v-on:click="curPage = 0"
+            v-if="curPage == 1 && isInvalidLogin()"
+          >
+            Save Cart and Login
           </button>
         </div>
       </div>
       <div id="welcome-page" v-show="curPage == 0">
         <h1>Welcome to the Store</h1>
+        <div>Please Enter Your Username:</div>
+        <input v-model="userName" placeholder="Username" />
+        <br />
+        <div>Please Enter Your Password:</div>
+        <input type="password" v-model="passWord" placeholder="Password" />
+        <br />
+        <br />
         <button v-on:click="clickEnter()">Click to Shop</button>
       </div>
       <div v-show="curPage == 1" class="shopping-page">

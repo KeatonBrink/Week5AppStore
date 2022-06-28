@@ -8,6 +8,8 @@ var app = new Vue({
         shoppingCart: [],
         curPage: 0,
         runningTotal: 0,
+        userName: "",
+        passWord: "",
     },
     methods: {
         //functions here
@@ -32,7 +34,16 @@ var app = new Vue({
         },
         restartShopping: function () {
             this.curPage = 1;
-        }
+        },
+        userValidation: function () {
+            if (this.isInvalidLogin() || (this.curPage != 1)) {
+                return false;
+            }
+            return true;
+        },
+        isInvalidLogin: function () {
+            return this.userName == "" || this.passWord == "";
+        },
 
     },
     //  This method uses .then() to talk to api at start of page
