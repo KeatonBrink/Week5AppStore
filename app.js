@@ -19,7 +19,7 @@ var app = new Vue({
         enterShoppingCart: function () {
             this.curPage = 2;
             for (let i = 0; i < this.shoppingCart.length; i++){
-                this.runningTotal += this.shoppingCart[i].price;
+                this.runningTotal += this.shoppingCart[i].totalCost;
                 // console.log("New price to add: ", this.shoppingCart[i].price, " Running Total: ", this.runningTotal);
             }
             // for (element in this.shoppingCart) {
@@ -35,12 +35,14 @@ var app = new Vue({
         restartShopping: function () {
             this.curPage = 1;
         },
+
         userValidation: function () {
             if (this.isInvalidLogin() || (this.curPage != 1)) {
                 return false;
             }
             return true;
         },
+
         isInvalidLogin: function () {
             return this.userName == "" || this.passWord == "";
         },
@@ -92,7 +94,22 @@ Vue.component('item', {
     ],
     methods: {
         addToShoppingCart: function () {
-            this.cart.push(this.item);
+            let newitem = true;
+            for (let i = 0; i < this.cart.length; i++){
+                // console.log("Comparing ", this.cart[i].title, " to ", this.item.title)
+                if (this.cart[i].title == this.item.title) {
+                    console.log("We are in");
+                    this.cart[i].ammount++;
+                    this.cart[i].totalCost = this.cart[i].price*this.cart[i].ammount;
+                    console.log(this.cart[i].totalCost);
+                    newitem = false;
+                }
+            }
+            if (newitem == true) {
+                this.item.ammount = 1;
+                this.item.totalCost = this.item.price
+                this.cart.push(this.item);
+            }
             // this.cost += this.item.price;
             console.log("Item added to cart: ", this.item.title);
         }
@@ -107,7 +124,9 @@ Vue.component('cartitem', {
         <br />
         <h3>{{item.title}}</h3>
         <br />
-        {{item.price}}
+        Quantity: {{item.ammount}}
+        <br/>
+        Cost: {{item.totalCost}}
         <br />
     </div>`,
     data: function () {
