@@ -45,3 +45,8 @@
     display: flex;
     justify-content: space-between;
 }
+
+#buy-area {
+    height: 25px;
+    background-color:rgb(231, 247, 242) ;
+}

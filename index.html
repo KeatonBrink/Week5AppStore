@@ -12,15 +12,19 @@
   </head>
   <body>
     <div id="app">
+      <div class="shopping-page">
+        <div id="storefront-header">
+          <h2>Storefront</h2>
+          <button v-on:click="enterShoppingCart()" v-show="curPage == 1">
+            View Cart
+          </button>
+        </div>
+      </div>
       <div id="welcome-page" v-show="curPage == 0">
         <h1>Welcome to the Store</h1>
         <button v-on:click="clickEnter()">Click to Shop</button>
       </div>
       <div v-show="curPage == 1" class="shopping-page">
-        <div id="storefront-header">
-          <h2>Storefront</h2>
-          <button v-on:click="enterShoppingCart()">View Cart</button>
-        </div>
         <div class="items-area">
           <item
             v-for="(product, index) in products"
@@ -42,7 +46,30 @@
             class="cart-item-block"
           >
           </cartitem>
-          Total: {{runningTotal}}
+          <div id="buy-area">
+            Total: {{runningTotal}}
+            <button
+              v-on:click="clearShoppingCart()"
+              v-if="shoppingCart.length > 1"
+            >
+              Buy Products
+            </button>
+            <button
+              v-on:click="clearShoppingCart()"
+              v-else-if="shoppingCart.length == 1"
+            >
+              Buy Product
+            </button>
+            <button v-on:click="restartShopping()" v-else>
+              Go Back and Find Something!
+            </button>
+          </div>
+        </div>
+      </div>
+      <div v-show="curPage==3" class="shopping-page">
+        <div class="cart-area">
+          Thank you for your purchase!
+          <button v-on:click="restartShopping()">Return to Store</button>
         </div>
       </div>
     </div>

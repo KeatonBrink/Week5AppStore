@@ -16,11 +16,24 @@ var app = new Vue({
         },
         enterShoppingCart: function () {
             this.curPage = 2;
+            for (let i = 0; i < this.shoppingCart.length; i++){
+                this.runningTotal += this.shoppingCart[i].price;
+                // console.log("New price to add: ", this.shoppingCart[i].price, " Running Total: ", this.runningTotal);
+            }
             // for (element in this.shoppingCart) {
             //     this.runningTotal += element.price
             //     console.log("Cost to add: ", element.price);
             // }
+        },
+        clearShoppingCart: function () {
+            this.shoppingCart = [];
+            this.curPage = 3;
+            this.runningTotal = 0;
+        },
+        restartShopping: function () {
+            this.curPage = 1;
         }
+
     },
     //  This method uses .then() to talk to api at start of page
     // created: function () {
