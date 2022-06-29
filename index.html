@@ -67,10 +67,21 @@
           <cartitem
             v-for="(product, index) in shoppingCart"
             v-bind:item="product"
+            v-bind:ammounter="product.ammount"
+            v-bind:coster="product.totalCost"
             v-bind:key="index"
             class="cart-item-block"
           >
           </cartitem>
+          <!-- <div v-for="product in shoppingCart">
+            {{product.title}}
+            <br />
+            {{product.ammount}}
+            <br />
+            {{product.totalCost}}
+            <br />
+            <br />
+          </div> -->
           <div id="buy-area">
             Total: {{runningTotal}}
             <button

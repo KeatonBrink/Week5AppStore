@@ -123,11 +123,18 @@ Vue.component('cartitem', {
         <br />
         <br />
         <h3>{{item.title}}</h3>
+        <!--
         <br />
         Quantity: {{item.ammount}}
+        -->
+        <br />
+        Quantity: {{ammounter}} <br />
+        Cost: {{coster}}
         <br/>
+        <!-- 
         Cost: {{item.totalCost}}
         <br />
+        -->
     </div>`,
     data: function () {
         return {
@@ -136,6 +143,8 @@ Vue.component('cartitem', {
     },
     props: [
         "item",
+        "coster",
+        "ammounter",
     ],
     methods: {
     }
