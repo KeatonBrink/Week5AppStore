@@ -64,6 +64,12 @@ var app = new Vue({
         //await stops the asyncronouse function, and forces the line to finish working  
         const response = await fetch(API_URL + "/products");
         const data = await response.json();
+
+        data.forEach(element => {
+            element.ammount = 0;
+            element.totalCost = 0;
+        });
+
         this.products = data;
       }
 });
@@ -123,18 +129,19 @@ Vue.component('cartitem', {
         <br />
         <br />
         <h3>{{item.title}}</h3>
-        <!--
+        
         <br />
         Quantity: {{item.ammount}}
-        -->
+        <!--
         <br />
-        Quantity: {{ammounter}} <br />
-        Cost: {{coster}}
+        Quantity: {{ammounter}} 
+        <br />
+        Cost: {{coster}} 
+        -->
         <br/>
-        <!-- 
+         
         Cost: {{item.totalCost}}
         <br />
-        -->
     </div>`,
     data: function () {
         return {
