@@ -132,14 +132,8 @@ Vue.component('cartitem', {
         
         <br />
         Quantity: {{item.ammount}}
-        <!--
-        <br />
-        Quantity: {{ammounter}} 
-        <br />
-        Cost: {{coster}} 
-        -->
+        
         <br/>
-         
         Cost: {{item.totalCost}}
         <br />
     </div>`,
